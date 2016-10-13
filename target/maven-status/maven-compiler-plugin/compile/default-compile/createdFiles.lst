@@ -1,0 +1,12 @@
+ByGender$TokenizerMapper.class
+ByOrigin$IntSumReducer.class
+WordCount.class
+ByGender.class
+ByOrigin$TokenizerMapper.class
+WordCount$TokenizerMapper.class
+ByNumberOfOrigin$IntSumReducer.class
+ByNumberOfOrigin.class
+ByOrigin.class
+ByGender$IntSumReducer.class
+WordCount$IntSumReducer.class
+ByNumberOfOrigin$TokenizerMapper.class
