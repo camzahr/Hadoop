@@ -1,0 +1,1 @@
+Inspired by the Word Count example: https://hadoop.apache.org/docs/stable/hadoop-mapreduce-client/hadoop-mapreduce-client-core/MapReduceTutorial.html
