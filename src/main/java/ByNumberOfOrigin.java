@@ -25,14 +25,13 @@ public class ByNumberOfOrigin {
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
-            // Separate each information to get the one we want
+            //  Split the text with each ;
             String[] data = value.toString().split(";");
 
-            // The origins are in the third place of the data set
-            // Each origin is separated with a comma
+            // Isolate the information that we want
             String[] origins = data[2].split(", ");
 
-            // The number of origins is the key, and 1 is the value
+            // We write the key, and we initialized with one
             context.write(new IntWritable(origins.length), one);
         }
     }
@@ -44,18 +43,18 @@ public class ByNumberOfOrigin {
         public void reduce(IntWritable key, Iterable<IntWritable> values,
                            Context context
         ) throws IOException, InterruptedException {
-            // Initialize the final sum with 0
+            // Initialize the reuslt with 0
             int sum = 0;
 
-            // Let's browse all the given values
+            // We check each value
             for (IntWritable val : values) {
-                // Each value is added to the final sum
+                // Current value is added to the result final
                 sum += val.get();
             }
 
             result.set(sum);
 
-            // The key is the word given in argument, and the value is the final sum
+            // We pick the current word and the final result of the reducer
             context.write(key, result);
         }
     }

@@ -26,7 +26,7 @@ public class ByOrigin {
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
-            // Separate each information to get the one we want
+            //  Split the text with each ;
             String[] data = value.toString().split(";");
 
             // The origins are in the third part of the data set
@@ -51,11 +51,18 @@ public class ByOrigin {
         public void reduce(Text key, Iterable<IntWritable> values,
                            Context context
         ) throws IOException, InterruptedException {
+            // Initialize the reuslt with 0
             int sum = 0;
+
+            // We check each value
             for (IntWritable val : values) {
+                // Current value is added to the result final
                 sum += val.get();
             }
+
             result.set(sum);
+
+            //We pick the current word and the final result of the reducer
             context.write(key, result);
         }
     }

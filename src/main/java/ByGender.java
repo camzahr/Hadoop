@@ -26,19 +26,20 @@ public class ByGender {
 
         public void map(Object key, Text value, Context context
         ) throws IOException, InterruptedException {
-            // Separate each information to get the one we want
+            // Split the text with each ;
             String[] data = value.toString().split(";");
 
-            // The gender is in the second part of the data set
+            // isolate the gender information
             String gender = data[1];
 
-            // Let's determine if the gender corresponds to a male and/or a female
-            boolean isMale = gender.equals("m") || gender.equals("m,f") || gender.equals("f,m");
-            boolean isFemale = gender.equals("f") || gender.equals("m,f") || gender.equals("f,m");
+            // write male or/and female
+            if(gender.equals("m") ||gender.equals("m, f")||gender.equals("f, m")){
+                context.write(new Text("male"), one);
+            }
+            if(gender.equals("f") ||gender.equals("m, f")||gender.equals("f, m")){
+                context.write(new Text("female"), one);
+            }
 
-            // Let's write on both keys (male and female) the "boolean-to-IntWritable conversion" of the booleans
-            context.write(new Text("male"), isMale ? one : zero);
-            context.write(new Text("female"), isFemale ? one : zero);
         }
     }
 
@@ -53,19 +54,19 @@ public class ByGender {
             float sum = 0;
             float total = 0;
 
-            // Let's browse the given values list
+            // See each value
             for (IntWritable val : values) {
-                // The current value is added to the final sum
+                // Current value is added to the result final
                 sum += val.get();
 
-                // The total number of elements is incremented
+                // We increment the count
                 ++total;
             }
 
-            // The result is calculated as a percentage
+            // let's get a percentage
             result.set(sum / total * 100);
 
-            // The key is the given word, and the value is the percentage
+            // We pick the current word and the final result of the reducer
             context.write(key, result);
         }
     }
