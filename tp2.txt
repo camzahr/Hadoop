@@ -1,0 +1,10 @@
+Can we use Combiner? Why? 
+
+1 - Count first name by origin
+	-> Yes, no problem
+
+2 - Count number of first name by number of origin
+	-> No, because the information is too much sophisticated
+
+3 - Proportion by gender
+	-> Yes it is possible, because we have only 2 possible values : Male and Female
